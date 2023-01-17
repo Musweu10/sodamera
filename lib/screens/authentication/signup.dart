@@ -190,9 +190,7 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 35),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(
-                                  builder: (context) => BottomNav()));
+                          Navigator.popAndPushNamed(context, "/bottomNav");
                         },
                         child: Container(
                           decoration: BoxDecoration(

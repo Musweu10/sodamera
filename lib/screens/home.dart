@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.vertical,
-      children:  const [
+      children:   const [
         WalletCard(),
         SizedBox(
           height: 30,

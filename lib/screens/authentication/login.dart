@@ -147,12 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const BottomNav(),
-                                ),
-                              );
+                            Navigator.popAndPushNamed(context, "/bottomNav");
                             },
                             child: Container(
                               width: 60,

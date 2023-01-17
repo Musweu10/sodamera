@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sodamera/screens/my_cards.dart';
+import 'package:sodamera/screens/profile.dart';
 
+import '../screens/add_card.dart';
 import '../screens/home.dart';
+import '../screens/make_payment.dart';
+import 'appBarActions.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);
@@ -11,24 +16,27 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
+  String _currentTabMenu = "DashBoard";
+
+  Widget buildTransactionAppBar(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const AddCardScreen(),
+          ),
+        );
+      },
+      icon: const Icon(Icons.add, size: 30, color: Colors.blue),
+    );
+  }
+
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    Container(
-      color: Colors.lightBlue,
-      child: const Text(
-        'Index 1: Business',
-        style: optionStyle,
-      ),
-    ),
-    Container(
-      color: Colors.greenAccent,
-      child: const Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
-    ),
+    CardsScreen(),
+    const MakePaymentScreen(),
     Container(
       color: Colors.greenAccent,
       child: const Text(
@@ -36,18 +44,33 @@ class _BottomNavState extends State<BottomNav> {
         style: optionStyle,
       ),
     ),
-    Container(
-      color: Colors.greenAccent,
-      child: const Text(
-        'Index 4: School',
-        style: optionStyle,
-      ),
-    ),
+    const ProfileScreen(),
+  ];
+
+  static final List<Widget> _appBarActions = [
+     Container(),
+  const AppBarActionItems(),
+     Container(),
+     Container(),
+  const AppBarActionItemEdit(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (index == 0) {
+        _currentTabMenu = "DashBoard";
+      } else if (index == 1) {
+        buildTransactionAppBar(context);
+        _currentTabMenu = "My Cards";
+      } else if (index == 2) {
+        _currentTabMenu = "Make Payment";
+      } else if (index == 3) {
+        _currentTabMenu = "Favorites";
+      } else if (index == 4) {
+        buildTransactionAppBar(context);
+        _currentTabMenu = "Profile";
+      }
     });
   }
 
@@ -55,8 +78,13 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // backgroundColor: Colors.blue,
+        centerTitle: true,
+        title: Text(_currentTabMenu),
         leading: Container(),
-        title: const Text('Sodamera'),
+        actions: [
+          _appBarActions.elementAt(_selectedIndex)
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -94,8 +122,9 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings_outlined,
+              Icons.person_outlined,
               color: Colors.black,
+              size: 30,
             ),
             label: '',
           ),
