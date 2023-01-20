@@ -10,12 +10,31 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.vertical,
-      children:   const [
+      children: const [
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: ListTile(
+              title: Text(
+                "Hello, Joshua",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text("We are glad to see you!"),
+            )),
         WalletCard(),
         SizedBox(
           height: 30,
         ),
-        Text("Previous Transactions"),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "Previous Transactions",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
         SizedBox(
           height: 30,
         ),

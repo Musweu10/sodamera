@@ -137,50 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.black,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                            Navigator.popAndPushNamed(context, "/bottomNav");
-                            },
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white38,
-                              ),
-                              child: const Icon(Icons.facebook_outlined),
-                            ),
-                          ),
-                          const SizedBox(width: 50),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const BottomNav()));
-                            },
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white38,
-                              ),
-                              child: const Icon(Icons.facebook_outlined),
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),

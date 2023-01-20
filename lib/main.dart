@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sodamera/screens/authentication/fingerprint.dart';
 import 'package:sodamera/screens/authentication/login.dart';
 import 'package:sodamera/screens/home.dart';
 import 'package:sodamera/screens/onboarding/onboarding.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const OnboardingScreen() ,
         '/bottomNav': (context) => const BottomNav(),
         '/login': (context) => const LoginScreen(),
+        '/biometrics': (context) => const BiometricFingerPrintScreen(),
       },
       // home: const OnboardingScreen(),
     );

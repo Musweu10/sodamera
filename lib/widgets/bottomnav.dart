@@ -3,6 +3,7 @@ import 'package:sodamera/screens/my_cards.dart';
 import 'package:sodamera/screens/profile.dart';
 
 import '../screens/add_card.dart';
+import '../screens/favorites.dart';
 import '../screens/home.dart';
 import '../screens/make_payment.dart';
 import 'appBarActions.dart';
@@ -16,7 +17,7 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
-  String _currentTabMenu = "DashBoard";
+  String _currentTabMenu = "Dashboard";
 
   Widget buildTransactionAppBar(BuildContext context) {
     return IconButton(
@@ -32,34 +33,28 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     CardsScreen(),
     const MakePaymentScreen(),
-    Container(
-      color: Colors.greenAccent,
-      child: const Text(
-        'Index 3: School',
-        style: optionStyle,
-      ),
-    ),
+    const FavoritesScreen(),
     const ProfileScreen(),
   ];
 
   static final List<Widget> _appBarActions = [
-     Container(),
-  const AppBarActionItems(),
-     Container(),
-     Container(),
-  const AppBarActionItemEdit(),
+    Container(),
+    const AppBarActionItems(),
+    Container(),
+    Container(),
+    const AppBarActionItemEdit(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       if (index == 0) {
-        _currentTabMenu = "DashBoard";
+        _currentTabMenu = "Dashboard";
       } else if (index == 1) {
         buildTransactionAppBar(context);
         _currentTabMenu = "My Cards";
@@ -77,14 +72,13 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         // backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(_currentTabMenu),
         leading: Container(),
-        actions: [
-          _appBarActions.elementAt(_selectedIndex)
-        ],
+        actions: [_appBarActions.elementAt(_selectedIndex)],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

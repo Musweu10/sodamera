@@ -22,17 +22,12 @@ class CardsScreen extends StatelessWidget {
   final List<Card> cards = [
     Card(
       cardNumber: "1234  5678  9123  4567",
-      cardHolderName: "Tanya Robinson",
+      cardHolderName: "Joshua Sodala",
       expiryDate: "02/23",
     ),
     Card(
       cardNumber: "1234  5678  9123  4567",
-      cardHolderName: "Tanya Robinson",
-      expiryDate: "02/23",
-    ),
-    Card(
-      cardNumber: "1234  5678  9123  4567",
-      cardHolderName: "Tanya Robinson",
+      cardHolderName: "Zac Sodala",
       expiryDate: "02/23",
     ),
   ];
@@ -42,14 +37,15 @@ class CardsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Cards"),
+        // title: const Text("Cards"),
       ),
       body: ListView(
         children: [
           const VerticalSpacer(height: 24),
           SizedBox(
-            height: 170,
+            height: 200,
             child: ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -66,13 +62,6 @@ class CardsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 6,
-                height: 6,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF8FA1B4).withOpacity(0.2965),
-                    shape: BoxShape.circle),
-              ),
               const SizedBox(width: 6),
               Container(
                 width: 8,
@@ -93,7 +82,7 @@ class CardsScreen extends StatelessWidget {
           ),
           const VerticalSpacer(height: 32),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -106,7 +95,7 @@ class CardsScreen extends StatelessWidget {
                 ),
                 const VerticalSpacer(height: 8),
                 TextField(
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   style: TextStyle(
                     fontSize: 14,
                     color: Theme.of(context).colorScheme.primary,
@@ -373,7 +362,7 @@ class CardsScreen extends StatelessWidget {
           height: 373,
           width: 327,
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 10,
             ),
             child: Column(
@@ -389,7 +378,7 @@ class CardsScreen extends StatelessWidget {
                   ),
                 ),
                 const VerticalSpacer(height: 24),
-                Text(
+                const Text(
                   "Are you sure to remove this card?",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
@@ -435,7 +424,7 @@ class CardsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                           color: const Color(0xFFFB3640),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Remove",
                             style: TextStyle(
@@ -468,8 +457,8 @@ class PaymentCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 285,
-          height: 170,
+          width: 300,
+          height: 200,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(10),
