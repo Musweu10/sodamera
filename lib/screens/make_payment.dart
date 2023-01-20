@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../widgets/primary_button.dart';
 import '../widgets/vertical_spacer.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
@@ -265,12 +263,63 @@ class _MakePaymentScreenState extends State<MakePaymentScreen> {
             ],
           ),
         ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            if (_supportState == _SupportState.unknown)
+              const CircularProgressIndicator()
+            else if (_supportState == _SupportState.supported)
+              const Text('This device is supported')
+            else
+              const Text('This device is not supported'),
+            const Divider(height: 100),
+            Text('Can check biometrics: $_canCheckBiometrics\n'),
+            ElevatedButton(
+              onPressed: _checkBiometrics,
+              child: const Text('Check biometrics'),
+            ),
+            const Divider(height: 100),
+            Text('Available biometrics: $_availableBiometrics\n'),
+            ElevatedButton(
+              onPressed: _getAvailableBiometrics,
+              child: const Text('Get available biometrics'),
+            ),
+            const Divider(height: 100),
+            Text('Current State: $_authorized\n'),
+            if (_isAuthenticating)
+              ElevatedButton(
+                onPressed: _cancelAuthentication,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const <Widget>[
+                    Text('Cancel Authentication'),
+                    Icon(Icons.cancel),
+                  ],
+                ),
+              )
+            else
+              Column(
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: _authenticate,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Text('Authenticate'),
+                        Icon(Icons.perm_device_information),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
         const SizedBox(height: 20),
         Center(
           child: ElevatedButton(
             style: ButtonStyle(
               padding: MaterialStateProperty.all(
-                EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               backgroundColor: MaterialStateProperty.all(
                 Theme.of(context).colorScheme.secondary,
