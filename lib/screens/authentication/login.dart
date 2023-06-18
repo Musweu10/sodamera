@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sodamera/screens/authentication/signup.dart';
 import 'package:sodamera/widgets/bottomnav.dart';
@@ -10,6 +11,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,
                         ),
-                        child: const TextField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                        child: TextField(
+                          controller: _emailController,
+                          style: const  TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
                               Icons.email,
@@ -79,9 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,
                         ),
-                        child: const TextField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                        child: TextField(
+                          controller: _passwordController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
                               Icons.lock,
@@ -95,10 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 35),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BottomNav()));
+                          FirebaseAuth.instance.signInWithEmailAndPassword(email:
+                          _emailController.text.trim(), password: _passwordController.text.trim());
                         },
                         child: Container(
                           decoration: BoxDecoration(

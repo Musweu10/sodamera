@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sodamera/widgets/bottomnav.dart';
 
@@ -9,6 +10,17 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,64 +48,8 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'First Name',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.black,
-                        ),
-                        child: const TextField(
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            hintText: 'First Name',
-                            hintStyle: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Last Name',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
 
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.black,
-                        ),
-                        child: const TextField(
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            hintText: 'Last Name',
-                            hintStyle: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
+
                       const SizedBox(height: 10),
                       const Text(
                         'Email',
@@ -111,10 +67,11 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,
                         ),
-                        child: const TextField(
+                        child: TextField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
                               Icons.email,
@@ -128,35 +85,6 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 10),
                       //NRC
 
-                      const Text(
-                        'NRC',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.black,
-                        ),
-                        child: const TextField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.numbers,
-                              color: Colors.white,
-                            ),
-                            hintText: 'NRC',
-                            hintStyle: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 10),
 
                       const Text(
@@ -174,9 +102,10 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,
                         ),
-                        child: const TextField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                        child: TextField(
+                          controller: _passwordController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
                               Icons.lock,
@@ -190,7 +119,8 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 35),
                       GestureDetector(
                         onTap: () {
-                          Navigator.popAndPushNamed(context, "/bottomNav");
+                          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailController.text.trim(),
+                              password: _passwordController.text.trim());
                         },
                         child: Container(
                           decoration: BoxDecoration(

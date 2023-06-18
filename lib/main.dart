@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sodamera/screens/authentication/fingerprint.dart';
 import 'package:sodamera/screens/authentication/login.dart';
@@ -5,7 +7,9 @@ import 'package:sodamera/screens/home.dart';
 import 'package:sodamera/screens/onboarding/onboarding.dart';
 import 'package:sodamera/widgets/bottomnav.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -20,6 +24,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
+      ),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const BiometricFingerPrintScreen();
+          } else {
+            return const LoginScreen();
+          }
+        },
       ),
       initialRoute: '/',
       routes: {
