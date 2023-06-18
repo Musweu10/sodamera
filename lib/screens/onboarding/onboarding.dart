@@ -42,26 +42,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       globalBackgroundColor: Colors.white,
       pages: [
         PageViewModel(
-          title: "Get Inspired",
+          title: "Biometric Capacity",
           body:
-          "Stride is a social network for skaters - discover, share and get inspired.",
+          "With the use of biometric capacity, your shopping and transactions are made faster and even easier.",
           image: _buildImage('fingerprint.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: '',
+          title: "Card Transactions",
           body:
-          "A lounge for skaters around the world to connect and share their love of skateboarding.",
+          "A wide variety of card use and many ways to transact and transfer funds and purchase of goods.",
           image: _buildImage('onlinepay.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "",
+          title: "A wonderful environment",
           body:
-          " Share pictures of your latest tricks and challenges with other users, find out about upcoming events, or ask them for tips.",
+          "Create, Make, and accomplish transactions at a faster rate. s To find out more, hit below to get started.",
           image: _buildImage('onlinetransact.png'),
           footer: Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0,),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/login");

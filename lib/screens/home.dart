@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sodamera/widgets/homescreen/walletCard.dart';
 
@@ -8,25 +9,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final useremail = FirebaseAuth.instance.currentUser;
+
     return ListView(
       scrollDirection: Axis.vertical,
-      children: const [
+      children:  [
         Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
               title: Text(
-                "Hello, Joshua",
-                style: TextStyle(
+                "Hello, ${useremail?.email}",
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Text("We are glad to see you!"),
+              subtitle: const Text("We are glad to see you!"),
             )),
-        WalletCard(),
-        SizedBox(
+        const WalletCard(),
+        const SizedBox(
           height: 30,
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             "Previous Transactions",
@@ -35,10 +39,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
-        Transactions(),
+        const Transactions(),
       ],
     );
   }
